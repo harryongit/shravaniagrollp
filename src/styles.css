@@ -1,0 +1,282 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * SHRAVANI AGROPRODUCTS — Field & Harvest Design System
+ * Palette: warm cream, oat, deep field green, harvest amber, terracotta clay
+ * Type: Outfit (display) + Figtree (text)
+ */
+
+@theme inline {
+  --font-display: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Figtree", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 6px);
+  --radius-2xl: calc(var(--radius) + 14px);
+  --radius-3xl: calc(var(--radius) + 24px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-clay: var(--clay);
+  --color-clay-foreground: var(--clay-foreground);
+  --color-amber: var(--amber);
+  --color-amber-foreground: var(--amber-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+
+  --shadow-soft: 0 1px 2px oklch(0 0 0 / 0.04), 0 8px 24px -12px oklch(0.28 0.03 90 / 0.12);
+  --shadow-lift: 0 2px 4px oklch(0 0 0 / 0.04), 0 24px 48px -20px oklch(0.28 0.03 90 / 0.18);
+}
+
+:root {
+  --radius: 0.75rem;
+
+  /* warm cream base */
+  --background: oklch(0.976 0.012 90);
+  --surface: oklch(0.962 0.018 88);
+  --surface-2: oklch(0.938 0.025 86);
+  --foreground: oklch(0.22 0.02 85);
+  --ink: oklch(0.16 0.015 90);
+  --ink-soft: oklch(0.42 0.02 88);
+
+  --card: oklch(0.988 0.008 90);
+  --card-foreground: oklch(0.22 0.02 85);
+  --popover: oklch(0.988 0.008 90);
+  --popover-foreground: oklch(0.22 0.02 85);
+
+  /* deep field green */
+  --primary: oklch(0.38 0.07 148);
+  --primary-foreground: oklch(0.98 0.012 90);
+
+  /* soft oat as secondary surface */
+  --secondary: oklch(0.92 0.024 90);
+  --secondary-foreground: oklch(0.22 0.02 85);
+
+  --muted: oklch(0.93 0.02 88);
+  --muted-foreground: oklch(0.48 0.02 88);
+
+  /* harvest amber accent */
+  --accent: oklch(0.78 0.14 78);
+  --accent-foreground: oklch(0.22 0.05 60);
+  --amber: oklch(0.78 0.14 78);
+  --amber-foreground: oklch(0.22 0.05 60);
+
+  /* earth clay / terracotta */
+  --clay: oklch(0.6 0.14 42);
+  --clay-foreground: oklch(0.98 0.012 90);
+
+  --destructive: oklch(0.54 0.2 28);
+  --destructive-foreground: oklch(0.98 0.012 90);
+  --success: oklch(0.55 0.13 155);
+
+  --border: oklch(0.88 0.018 88);
+  --border-strong: oklch(0.78 0.02 88);
+  --input: oklch(0.88 0.018 88);
+  --ring: oklch(0.38 0.07 148);
+
+  --sidebar: oklch(0.962 0.018 88);
+  --sidebar-foreground: oklch(0.22 0.02 85);
+  --sidebar-primary: oklch(0.38 0.07 148);
+  --sidebar-primary-foreground: oklch(0.98 0.012 90);
+  --sidebar-accent: oklch(0.92 0.024 90);
+  --sidebar-accent-foreground: oklch(0.22 0.02 85);
+  --sidebar-border: oklch(0.88 0.018 88);
+  --sidebar-ring: oklch(0.38 0.07 148);
+
+  --chart-1: oklch(0.38 0.07 148);
+  --chart-2: oklch(0.78 0.14 78);
+  --chart-3: oklch(0.6 0.14 42);
+  --chart-4: oklch(0.55 0.09 160);
+  --chart-5: oklch(0.68 0.1 100);
+}
+
+.dark {
+  --background: oklch(0.16 0.012 150);
+  --surface: oklch(0.2 0.015 150);
+  --surface-2: oklch(0.24 0.018 150);
+  --foreground: oklch(0.94 0.015 88);
+  --ink: oklch(0.96 0.012 90);
+  --ink-soft: oklch(0.72 0.02 88);
+
+  --card: oklch(0.2 0.015 150);
+  --card-foreground: oklch(0.94 0.015 88);
+  --popover: oklch(0.2 0.015 150);
+  --popover-foreground: oklch(0.94 0.015 88);
+
+  --primary: oklch(0.72 0.13 140);
+  --primary-foreground: oklch(0.16 0.02 150);
+
+  --secondary: oklch(0.26 0.018 150);
+  --secondary-foreground: oklch(0.94 0.015 88);
+
+  --muted: oklch(0.26 0.018 150);
+  --muted-foreground: oklch(0.68 0.02 88);
+
+  --accent: oklch(0.8 0.15 78);
+  --accent-foreground: oklch(0.2 0.05 60);
+  --amber: oklch(0.8 0.15 78);
+  --amber-foreground: oklch(0.2 0.05 60);
+
+  --clay: oklch(0.68 0.15 42);
+  --clay-foreground: oklch(0.16 0.02 150);
+
+  --destructive: oklch(0.62 0.2 28);
+  --destructive-foreground: oklch(0.98 0.012 90);
+  --success: oklch(0.68 0.13 155);
+
+  --border: oklch(1 0 0 / 10%);
+  --border-strong: oklch(1 0 0 / 20%);
+  --input: oklch(1 0 0 / 12%);
+  --ring: oklch(0.72 0.13 140);
+
+  --sidebar: oklch(0.2 0.015 150);
+  --sidebar-foreground: oklch(0.94 0.015 88);
+  --sidebar-primary: oklch(0.72 0.13 140);
+  --sidebar-primary-foreground: oklch(0.16 0.02 150);
+  --sidebar-accent: oklch(0.26 0.018 150);
+  --sidebar-accent-foreground: oklch(0.94 0.015 88);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.72 0.13 140);
+
+  --shadow-soft: 0 1px 2px oklch(0 0 0 / 0.4), 0 8px 24px -12px oklch(0 0 0 / 0.5);
+  --shadow-lift: 0 2px 6px oklch(0 0 0 / 0.4), 0 30px 60px -22px oklch(0 0 0 / 0.6);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv11";
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+    color: var(--color-ink);
+  }
+
+  ::selection {
+    background: var(--color-primary);
+    color: var(--color-primary-foreground);
+  }
+}
+
+@utility container-x {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+  max-width: 82rem;
+  @media (min-width: 768px) {
+    padding-inline: 2rem;
+  }
+  @media (min-width: 1280px) {
+    padding-inline: 3rem;
+  }
+}
+
+@utility text-display {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 0.98;
+}
+
+@utility text-eyebrow {
+  font-family: var(--font-sans);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--color-ink-soft);
+}
+
+@utility surface-card {
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-soft);
+}
+
+@utility hairline {
+  border: 1px solid color-mix(in oklab, var(--color-ink) 10%, transparent);
+}
+
+@utility glass-header {
+  background: color-mix(in oklab, var(--color-background) 72%, transparent);
+  backdrop-filter: saturate(160%) blur(14px);
+  border-bottom: 1px solid color-mix(in oklab, var(--color-ink) 8%, transparent);
+}
+
+@utility furrow-pattern {
+  background-image: repeating-linear-gradient(
+    100deg,
+    color-mix(in oklab, var(--color-primary) 8%, transparent) 0 1px,
+    transparent 1px 14px
+  );
+}
+
+@keyframes ticker {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-ticker {
+  animation: ticker 40s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
