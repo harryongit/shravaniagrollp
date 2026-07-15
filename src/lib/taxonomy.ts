@@ -18,64 +18,15 @@ export const taxonomy: TaxonomyCategory[] = [
     "slug": "seeds",
     "name": "Seeds",
     "tagline": "Field, vegetable, fruit and organic-certified varieties",
-    "count": 650,
+    "count": 65,
     "image": "https://images.unsplash.com/photo-1595855759920-86582396756a?w=800&q=80",
     "subcategories": [
       {
-        "slug": "vegetable-seeds",
-        "name": "Vegetable Seeds",
-        "items": [
-          "Hybrid Tomato Seeds",
-          "Premium Chilli Seeds",
-          "Brinjal Hybrid Seeds",
-          "Cucumber F1 Seeds",
-          "Okra Hybrid Seeds",
-          "Cabbage Seeds",
-          "Cauliflower Seeds",
-          "Watermelon Hybrid Seeds",
-          "Muskmelon Seeds",
-          "Bottle Gourd Seeds",
-          "Bitter Gourd Seeds",
-          "Pumpkin Seeds",
-          "Onion Seeds",
-          "Coriander Seeds",
-          "Spinach Seeds",
-          "Maize Hybrid Seeds",
-          "Paddy Seeds",
-          "Wheat Seeds",
-          "Cotton Seeds",
-          "Soybean Seeds"
-        ]
-      },
-      {
-        "slug": "fruit-seeds",
-        "name": "Fruit Seeds",
-        "items": []
-      },
-      {
-        "slug": "flower-seeds",
-        "name": "Flower Seeds",
-        "items": []
-      },
-      {
         "slug": "field-crop-seeds",
         "name": "Field Crop Seeds",
-        "items": []
-      },
-      {
-        "slug": "pulse-seeds",
-        "name": "Pulse Seeds",
-        "items": []
-      },
-      {
-        "slug": "fodder-seeds",
-        "name": "Fodder Seeds",
-        "items": []
-      },
-      {
-        "slug": "exotic-polyhouse-seeds",
-        "name": "Exotic & Polyhouse Seeds",
-        "items": []
+        "items": [
+          "Cotton Seeds"
+        ]
       }
     ]
   },
@@ -689,80 +640,16 @@ export const taxonomy: TaxonomyCategory[] = [
     ]
   },
   {
-    "slug": "livestock",
-    "name": "Livestock",
-    "tagline": "Poultry, cattle feed, supplements and milking machinery",
-    "count": 240,
-    "image": "https://images.unsplash.com/photo-1500651230702-0e2d8a49d4ad?w=800&q=80",
-    "subcategories": [
-      {
-        "slug": "cattle",
-        "name": "Cattle Supplies",
-        "items": [
-          "Cattle Feed",
-          "Calf Starter Feed",
-          "Mineral Mixture",
-          "Cattle Supplement",
-          "Chick Feeder",
-          "Milking Machine",
-          "Milking Bucket",
-          "Calf Feeding Bottle",
-          "Silage Culture",
-          "Feed Trough",
-          "Cattle Salt Block",
-          "Livestock Tonic",
-          "Cattle Dewormer",
-          "Feed Scoop"
-        ]
-      },
-      {
-        "slug": "poultry",
-        "name": "Poultry Supplies",
-        "items": [
-          "Poultry Feed",
-          "Poultry Supplement",
-          "Poultry Drinker",
-          "Poultry Vitamin Mix",
-          "Poultry Nest Box"
-        ]
-      },
-      {
-        "slug": "goat-farming",
-        "name": "Goat Farming",
-        "items": []
-      },
-      {
-        "slug": "sheep-farming",
-        "name": "Sheep Farming",
-        "items": []
-      },
-      {
-        "slug": "pig-farming",
-        "name": "Pig Farming",
-        "items": []
-      },
-      {
-        "slug": "dairy-equipment",
-        "name": "Dairy Equipment",
-        "items": [
-          "Dairy Feed"
-        ]
-      }
-    ]
-  },
-  {
     "slug": "urban-gardening",
     "name": "Urban Gardening",
     "tagline": "Kitchen garden kits, balcony planters and potting soils",
-    "count": 180,
+    "count": 144,
     "image": "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=800&q=80",
     "subcategories": [
       {
-        "slug": "kitchen-kits",
-        "name": "Kitchen Garden Kits",
+        "slug": "pots-tools",
+        "name": "Balcony Pots & Tools",
         "items": [
-          "Kitchen Garden Kit",
-          "Vegetable Grow Kit",
           "Ceramic Planter",
           "Plastic Pot",
           "Hanging Planter",
@@ -776,13 +663,6 @@ export const taxonomy: TaxonomyCategory[] = [
         ]
       },
       {
-        "slug": "balcony-kits",
-        "name": "Balcony Garden Kits",
-        "items": [
-          "Balcony Garden Kit"
-        ]
-      },
-      {
         "slug": "indoor-plants",
         "name": "Indoor Plants",
         "items": [
@@ -792,23 +672,11 @@ export const taxonomy: TaxonomyCategory[] = [
         ]
       },
       {
-        "slug": "pots-planters",
-        "name": "Pots & Planters",
-        "items": []
-      },
-      {
         "slug": "potting-mix",
         "name": "Potting Mix",
         "items": [
           "Potting Mix",
           "Compost Mix"
-        ]
-      },
-      {
-        "slug": "garden-tools",
-        "name": "Garden Tools",
-        "items": [
-          "Herb Garden Kit"
         ]
       },
       {
@@ -824,92 +692,24 @@ export const taxonomy: TaxonomyCategory[] = [
     "slug": "saplings-plants",
     "name": "Saplings & Plants",
     "tagline": "Fruit and timber crop saplings for orchard setup",
-    "count": 320,
+    "count": 96,
     "image": "https://images.unsplash.com/photo-1502082553048-f009c37129b9?w=800&q=80",
     "subcategories": [
       {
-        "slug": "mango",
-        "name": "Mango Saplings",
+        "slug": "medicinal-ornamental",
+        "name": "Medicinal & Ornamental Plants",
         "items": [
-          "Mango Sapling",
-          "Papaya Plant",
-          "Curry Leaf Plant",
           "Neem Sapling",
-          "Jamun Plant",
-          "Amla Plant",
-          "Custard Apple Plant",
-          "Dragon Fruit Plant",
           "Rose Plant",
           "Hibiscus Plant"
         ]
       },
       {
-        "slug": "coconut",
-        "name": "Coconut Saplings",
+        "slug": "timber-bamboo",
+        "name": "Timber & Bamboo Saplings",
         "items": [
-          "Coconut Sapling"
-        ]
-      },
-      {
-        "slug": "banana",
-        "name": "Banana Plants",
-        "items": [
-          "Banana Plant"
-        ]
-      },
-      {
-        "slug": "guava",
-        "name": "Guava Saplings",
-        "items": [
-          "Guava Sapling"
-        ]
-      },
-      {
-        "slug": "lemon",
-        "name": "Lemon Saplings",
-        "items": [
-          "Lemon Plant"
-        ]
-      },
-      {
-        "slug": "orange",
-        "name": "Orange Saplings",
-        "items": [
-          "Orange Plant"
-        ]
-      },
-      {
-        "slug": "pomegranate",
-        "name": "Pomegranate Saplings",
-        "items": [
-          "Pomegranate Plant"
-        ]
-      },
-      {
-        "slug": "drumstick",
-        "name": "Drumstick Saplings",
-        "items": [
-          "Drumstick Plant"
-        ]
-      },
-      {
-        "slug": "sandalwood",
-        "name": "Sandalwood Saplings",
-        "items": [
-          "Sandalwood Sapling"
-        ]
-      },
-      {
-        "slug": "teak",
-        "name": "Teak Saplings",
-        "items": [
-          "Teak Sapling"
-        ]
-      },
-      {
-        "slug": "bamboo",
-        "name": "Bamboo Saplings",
-        "items": [
+          "Teak Sapling",
+          "Sandalwood Sapling",
           "Bamboo Plant"
         ]
       }

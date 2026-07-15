@@ -17,7 +17,7 @@ export const Route = createFileRoute("/products/")({
       {
         name: "description",
         content:
-          "Browse seeds, crop protection, plant nutrition, irrigation, machinery, protected cultivation and livestock inputs from Shravani Agroproducts.",
+          "Browse seeds, crop protection, plant nutrition, irrigation, machinery, protected cultivation and farm inputs from Shravani Agroproducts.",
       },
     ],
   }),

@@ -8,21 +8,21 @@ const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY as string | undef
 let _client: SupabaseClient | null = null;
 
 function getClient(): SupabaseClient {
-  if (!supabaseUrl || !supabaseAnonKey) {
-    throw new Error(
-      "Supabase is not configured. Set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY in your .env file or Netlify environment variables.",
-    );
-  }
-  if (!_client) {
-    _client = createClient(supabaseUrl, supabaseAnonKey);
-  }
-  return _client;
+    if (!supabaseUrl || !supabaseAnonKey) {
+        throw new Error(
+            "Supabase is not configured. Set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY in your .env file or Netlify environment variables.",
+        );
+    }
+    if (!_client) {
+        _client = createClient(supabaseUrl, supabaseAnonKey);
+    }
+    return _client;
 }
 
 export const supabase = new Proxy({} as SupabaseClient, {
-  get(_target, prop) {
-    return getClient()[prop as keyof SupabaseClient];
-  },
+    get(_target, prop) {
+        return getClient()[prop as keyof SupabaseClient];
+    },
 });
 
 /** True when Supabase credentials are present in env */

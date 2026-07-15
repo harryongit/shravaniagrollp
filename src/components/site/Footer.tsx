@@ -10,7 +10,7 @@ const cols = [
       "Plant Nutrition",
       "Farm Machinery",
       "Irrigation",
-      "Livestock & Poultry",
+
       "Organic Farming",
     ],
   },

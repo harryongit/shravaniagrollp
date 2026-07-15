@@ -11,7 +11,6 @@ import {
   Tractor,
   Droplets,
   Home,
-  Activity,
   Flower2,
   TreePine,
   Hammer,
@@ -30,7 +29,7 @@ export const Route = createFileRoute("/catalog")({
       {
         name: "description",
         content:
-          "Explore the comprehensive taxonomy of seeds, crop protection, fertilizers, plant growth, machinery, irrigation, livestock, and services.",
+          "Explore the comprehensive taxonomy of seeds, crop protection, fertilizers, plant growth, machinery, irrigation, protected cultivation, and services.",
       },
     ],
   }),
@@ -46,7 +45,6 @@ const categoryIcons: Record<string, ComponentType<{ className?: string }>> = {
   "farm-machinery": Tractor,
   irrigation: Droplets,
   "protected-cultivation": Home,
-  livestock: Activity,
   "urban-gardening": Flower2,
   "saplings-plants": TreePine,
   "farm-accessories": Hammer,
@@ -63,7 +61,6 @@ const categoryAccents: Record<string, string> = {
   "farm-machinery": "border-l-clay text-clay bg-clay/5",
   irrigation: "border-l-primary text-primary bg-primary/5",
   "protected-cultivation": "border-l-amber text-amber bg-amber/5",
-  livestock: "border-l-clay text-clay bg-clay/5",
   "urban-gardening": "border-l-success text-success bg-success/5",
   "saplings-plants": "border-l-success text-success bg-success/5",
   "farm-accessories": "border-l-ink text-ink bg-ink/5",
@@ -163,7 +160,7 @@ function CatalogExplorer() {
           </h1>
           <p className="mt-2 text-sm text-ink-soft max-w-xl">
             Browse our original, comprehensive classification system. Search or filter through 13
-            high-level categories of seeds, crop protection, fertilizers, livestock supplies, tools,
+            high-level categories of seeds, crop protection, fertilizers, plant nutrition, tools,
             and services.
           </p>
         </div>
@@ -177,7 +174,7 @@ function CatalogExplorer() {
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search taxonomy... (e.g. Tomato, Fungicides, Bio Stimulants, Cattle)"
+            placeholder="Search taxonomy... (e.g. Tomato, Fungicides, Bio Stimulants, Drip)"
             className="w-full h-12 pl-12 pr-10 rounded-full bg-surface border border-border text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
           />
           {searchQuery && (
