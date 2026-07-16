@@ -66,7 +66,7 @@ function Checkout() {
         </div>
         <h1 className="text-display text-3xl mb-4">Order Confirmed!</h1>
         <p className="text-ink-soft mb-8">
-          Thank you for shopping with Shravani Agroproducts. Your order #SA-
+          Thank you for shopping with Shravani Agroproducts Enterprises LLP. Your order #SA-
           {Math.floor(Math.random() * 10000)} has been placed successfully.
         </p>
         <Button onClick={() => navigate({ to: "/" })} className="w-full">

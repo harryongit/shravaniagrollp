@@ -27,9 +27,9 @@ export const Route = createFileRoute("/products/$slug")({
     const { product } = loaderData;
     return {
       meta: [
-        { title: `${product.name} — ${product.brand} · Shravani Agroproducts` },
+        { title: `${product.name} — ${product.brand} · Shravani Agroproducts Enterprises LLP` },
         { name: "description", content: product.short },
-        { property: "og:title", content: `${product.name} — Shravani` },
+        { property: "og:title", content: `${product.name} — Shravani Agroproducts Enterprises LLP` },
         { property: "og:description", content: product.short },
       ],
     };

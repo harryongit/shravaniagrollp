@@ -28,7 +28,7 @@ function Contact() {
                 <MapPin className="h-5 w-5 text-primary" /> Registered Office
               </h3>
               <p className="text-sm text-ink-soft leading-relaxed">
-                SHRAVANI AGROPRODUCTS ENTERPRISES LLP
+                Shravani Agroproducts Enterprises LLP
                 <br />
                 Agriculture Hub, Phase 2<br />
                 Pune, Maharashtra 411001

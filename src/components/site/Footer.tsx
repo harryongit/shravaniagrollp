@@ -60,7 +60,7 @@ export function Footer() {
               <Mark size={36} />
               <div>
                 <div className="text-display text-lg font-semibold text-ink leading-none">
-                  Shravani
+                  Shravani Agroproducts Enterprises LLP
                 </div>
                 <div className="text-[0.62rem] uppercase tracking-[0.22em] text-ink-soft mt-1">
                   Agroproducts LLP

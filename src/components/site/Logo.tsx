@@ -46,11 +46,11 @@ export function Logo({ compact = false }: { compact?: boolean }) {
     <Link
       to="/"
       className="flex items-center gap-2.5 text-primary"
-      aria-label="Shravani Agroproducts home"
+      aria-label="Shravani Agroproducts Enterprises LLP home"
     >
       <Mark size={compact ? 28 : 34} />
       <span className="flex flex-col leading-none">
-        <span className="text-display text-[1.05rem] font-semibold text-ink">Shravani</span>
+        <span className="text-display text-[1.05rem] font-semibold text-ink">Shravani Agroproducts Enterprises LLP</span>
         {!compact && (
           <span className="text-[0.62rem] uppercase tracking-[0.22em] text-ink-soft mt-0.5">
             Agroproducts LLP

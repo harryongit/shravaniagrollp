@@ -36,7 +36,7 @@ function Register() {
         <h2 className="mt-6 text-display text-3xl font-bold tracking-tight text-ink">
           Create an account
         </h2>
-        <p className="mt-2 text-sm text-ink-soft">Join the Shravani Agroproducts network</p>
+        <p className="mt-2 text-sm text-ink-soft">Join the Shravani Agroproducts Enterprises LLP network</p>
       </div>
 
       <form className="mt-8 space-y-6" onSubmit={handleRegister}>

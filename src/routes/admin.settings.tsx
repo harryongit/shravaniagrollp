@@ -47,7 +47,7 @@ function AdminSettings() {
               <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
                 <div className="space-y-2">
                   <Label>Registered Business Name</Label>
-                  <Input defaultValue="SHRAVANI AGROPRODUCTS ENTERPRISES LLP" />
+                  <Input defaultValue="Shravani Agroproducts Enterprises LLP" />
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-2">

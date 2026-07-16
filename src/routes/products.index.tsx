@@ -13,11 +13,11 @@ export const Route = createFileRoute("/products/")({
   validateSearch: (search) => productSearchSchema.parse(search),
   head: () => ({
     meta: [
-      { title: "Shop all agricultural inputs — Shravani Agroproducts" },
+      { title: "Shop all agricultural inputs — Shravani Agroproducts Enterprises LLP" },
       {
         name: "description",
         content:
-          "Browse seeds, crop protection, plant nutrition, irrigation, machinery, protected cultivation and farm inputs from Shravani Agroproducts.",
+          "Browse seeds, crop protection, plant nutrition, irrigation, machinery, protected cultivation and farm inputs from Shravani Agroproducts Enterprises LLP.",
       },
     ],
   }),

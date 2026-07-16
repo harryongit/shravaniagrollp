@@ -362,7 +362,7 @@ export function Header() {
                   onClick={() => setMobileOpen(false)}
                   className="block px-4 py-2.5 text-sm text-ink-soft hover:text-ink"
                 >
-                  About Shravani
+                  About Shravani Agroproducts Enterprises LLP
                 </Link>
               </div>
             </nav>

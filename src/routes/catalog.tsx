@@ -25,7 +25,7 @@ import { motion, AnimatePresence } from "motion/react";
 export const Route = createFileRoute("/catalog")({
   head: () => ({
     meta: [
-      { title: "Agricultural Catalog Hierarchy — Shravani Agroproducts" },
+      { title: "Agricultural Catalog Hierarchy — Shravani Agroproducts Enterprises LLP" },
       {
         name: "description",
         content:

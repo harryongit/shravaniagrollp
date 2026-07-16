@@ -9,7 +9,7 @@ const pages: Record<string, { title: string; content: string }> = {
     title: "Privacy Policy",
     content: `
 ## 1. Introduction
-Shravani Agroproducts Enterprises LLP ("Shravani Agro", "we", "us", or "our"), incorporated under the Limited Liability Partnership Act, 2008, operates the agricultural marketplace platform at shravaniagro.com. This Privacy Policy explains how we collect, use, disclose, and protect your personal information.
+Shravani Agroproducts Enterprises LLP ("Shravani Agroproducts Enterprises LLP", "we", "us", or "our"), incorporated under the Limited Liability Partnership Act, 2008, operates the agricultural marketplace platform at shravaniagro.com. This Privacy Policy explains how we collect, use, disclose, and protect your personal information.
 
 ## 2. Information We Collect
 We collect information you provide directly to us, including your name, email address, phone number, postal address, farm profile details, payment information (processed securely via Razorpay/Stripe — we do not store card data), and any content you submit (reviews, advisory requests).
@@ -43,7 +43,7 @@ Shravani Agroproducts Enterprises LLP, Agriculture Hub, Phase 2, Pune, Maharasht
     title: "Terms of Service",
     content: `
 ## 1. Acceptance of Terms
-By accessing or using the Shravani Agro platform, you agree to be bound by these Terms of Service and our Privacy Policy. If you do not agree, please do not use the platform.
+By accessing or using the Shravani Agroproducts Enterprises LLP platform, you agree to be bound by these Terms of Service and our Privacy Policy. If you do not agree, please do not use the platform.
 
 ## 2. Eligibility
 The platform is available to users who are 18 years of age or older. Dealers and Distributors must hold a valid trade license and GSTIN.
@@ -55,7 +55,7 @@ All prices are displayed inclusive of applicable GST. We reserve the right to co
 All content, branding, illustrations, and platform code are the exclusive property of Shravani Agroproducts Enterprises LLP. You may not reproduce, republish, or redistribute any content without prior written permission.
 
 ## 5. Limitation of Liability
-To the maximum extent permitted by law, Shravani Agro shall not be liable for indirect, incidental, or consequential damages arising from use of the platform.
+To the maximum extent permitted by law, Shravani Agroproducts Enterprises LLP shall not be liable for indirect, incidental, or consequential damages arising from use of the platform.
 
 ## 6. Governing Law
 These Terms shall be governed by and construed in accordance with the laws of India. Any disputes shall be subject to the exclusive jurisdiction of courts in Pune, Maharashtra.

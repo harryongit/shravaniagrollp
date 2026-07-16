@@ -54,7 +54,7 @@ function Home() {
                   <span className="text-accent">on one shelf.</span>
                 </h1>
                 <p className="mt-5 max-w-lg text-[0.98rem] text-background/80 leading-relaxed">
-                  Shravani Agroproducts brings certified seed, crop protection, plant nutrition,
+                  Shravani Agroproducts Enterprises LLP brings certified seed, crop protection, plant nutrition,
                   irrigation and machinery under a single, agronomist-curated marketplace — built
                   for farmers, dealers and enterprises across India.
                 </p>
@@ -357,7 +357,7 @@ function Home() {
               Dealer Program
             </div>
             <h3 className="mt-3 text-display text-3xl sm:text-4xl lg:text-5xl leading-[1.02]">
-              Retail Shravani in your district.
+              Retail Shravani Agroproducts Enterprises LLP in your district.
             </h3>
             <p className="mt-4 text-background/70 leading-relaxed">
               Tier-based pricing, credit terms, protected territories, joint marketing budgets and a

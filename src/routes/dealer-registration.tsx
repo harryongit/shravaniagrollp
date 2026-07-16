@@ -17,7 +17,7 @@ function DealerRegistration() {
         <div className="container-x max-w-4xl text-center relative">
           <div className="text-eyebrow text-accent mb-4">Partner Program</div>
           <h1 className="text-display text-4xl sm:text-5xl lg:text-6xl leading-tight">
-            Become a Shravani Authorised Dealer
+            Become a Shravani Agroproducts Enterprises LLP Authorised Dealer
           </h1>
           <p className="mt-6 text-lg text-background/70 max-w-2xl mx-auto leading-relaxed">
             Join our network of 800+ dealers across India. Unlock dealer pricing, credit facilities,

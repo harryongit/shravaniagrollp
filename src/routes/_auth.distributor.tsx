@@ -52,7 +52,7 @@ function DistributorDashboard() {
           <div className="surface-card">
             <div className="p-6 border-b border-border flex items-center justify-between">
               <h3 className="text-lg font-medium text-ink flex items-center gap-2">
-                <Package className="h-5 w-5 text-primary" /> Inbound Purchase Orders (from Shravani
+                <Package className="h-5 w-5 text-primary" /> Inbound Purchase Orders (from Shravani Agroproducts Enterprises LLP
                 Agro)
               </h3>
             </div>
