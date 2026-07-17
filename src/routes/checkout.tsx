@@ -1,13 +1,14 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { CheckCircle2, ChevronRight, MapPin, Truck, CreditCard } from "lucide-react";
+import { CheckCircle2, ChevronRight, MapPin, Truck, CreditCard, LogIn, UserPlus, Smartphone, Building2, Wallet, ExternalLink } from "lucide-react";
 import { useCart } from "@/lib/cart-store";
-import { formatINR } from "@/lib/catalog";
+import { formatINR, findProduct } from "@/lib/catalog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { useAuth } from "@/lib/auth";
+import { useUserStore } from "@/lib/user-store";
+import { useOrderStore, type PaymentMethod } from "@/lib/order-store";
 
 export const Route = createFileRoute("/checkout")({
   component: Checkout,
@@ -22,9 +23,49 @@ const steps = [
 
 function Checkout() {
   const { lines, subtotal, clear } = useCart();
-  const { user } = useAuth();
+  const { currentUser } = useUserStore();
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(0);
+
+  if (!currentUser) {
+    return (
+      <div className="container-x py-24 text-center max-w-md mx-auto">
+        <div className="mx-auto h-16 w-16 bg-primary/10 text-primary rounded-full grid place-items-center mb-6">
+          <LogIn className="h-8 w-8" />
+        </div>
+        <h1 className="text-display text-3xl mb-4">Sign in to continue</h1>
+        <p className="text-ink-soft mb-8">You need to be logged in to place an order. Please sign in or create an account.</p>
+        <div className="space-y-3">
+          <Button onClick={() => navigate({ to: "/auth/login" })} className="w-full gap-2">
+            <LogIn className="h-4 w-4" /> Sign In
+          </Button>
+          <Button variant="outline" onClick={() => navigate({ to: "/auth/register" })} className="w-full gap-2">
+            <UserPlus className="h-4 w-4" /> Create an Account
+          </Button>
+          <Link to="/" className="block text-sm text-ink-soft hover:text-primary mt-4">
+            Continue browsing
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
+  if (currentUser.status === "pending") {
+    return (
+      <div className="container-x py-24 text-center max-w-md mx-auto">
+        <div className="mx-auto h-16 w-16 bg-amber/10 text-amber rounded-full grid place-items-center mb-6">
+          <LogIn className="h-8 w-8" />
+        </div>
+        <h1 className="text-display text-3xl mb-4">Account pending approval</h1>
+        <p className="text-ink-soft mb-8">
+          Your account is pending admin verification. You will be able to place orders once your account is approved.
+        </p>
+        <Button onClick={() => navigate({ to: "/dashboard" })} variant="outline">
+          Go to Dashboard
+        </Button>
+      </div>
+    );
+  }
 
   const [address, setAddress] = useState({
     name: "",
@@ -35,7 +76,10 @@ function Checkout() {
     phone: "",
   });
   const [deliveryMethod, setDeliveryMethod] = useState("standard");
-  const [paymentMethod, setPaymentMethod] = useState("razorpay");
+  const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>("cashfree_upi");
+  const [processing, setProcessing] = useState(false);
+  const [placedOrder, setPlacedOrder] = useState<any>(null);
+  const { placeOrder } = useOrderStore();
 
   if (lines.length === 0 && currentStep !== 4) {
     return (
@@ -51,27 +95,106 @@ function Checkout() {
   const handleNext = () => setCurrentStep((c) => Math.min(c + 1, 4));
   const handleBack = () => setCurrentStep((c) => Math.max(c - 1, 0));
 
-  const placeOrder = async () => {
-    // In a real app, this would call Supabase edge function to create order and initiate payment intent
-    // For this prototype, we simulate success
-    setCurrentStep(4);
-    clear();
+  const handlePlaceOrder = async () => {
+    setProcessing(true);
+    const enrichedLines = lines.map((l) => {
+      const p = findProduct(l.slug);
+      return {
+        ...l,
+        sku: p?.sku ?? "",
+        description: p?.description ?? l.name,
+        category: p?.category ?? "",
+      };
+    });
+    const result = placeOrder({
+      customerId: currentUser.id,
+      customerName: address.name,
+      customerEmail: currentUser.email,
+      customerPhone: address.phone,
+      lines: enrichedLines,
+      subtotal,
+      deliveryCharge: deliveryMethod === "express" ? 250 : 0,
+      gst: subtotal * 0.12,
+      total: subtotal + (deliveryMethod === "express" ? 250 : 0),
+      paymentMethod: paymentMethod as PaymentMethod,
+      shippingAddress: address.line1,
+      city: address.city,
+      state: address.state,
+      pincode: address.pincode,
+      deliveryMethod: deliveryMethod as "standard" | "express",
+    });
+    if (result.success && result.order) {
+      setPlacedOrder(result.order);
+      if (result.order.cfPaymentLink) {
+        window.open(result.order.cfPaymentLink, "_blank");
+      }
+      setCurrentStep(4);
+      clear();
+    }
+    setProcessing(false);
   };
 
   if (currentStep === 4) {
     return (
-      <div className="container-x py-24 text-center max-w-md">
+      <div className="container-x py-24 text-center max-w-lg mx-auto">
         <div className="mx-auto h-16 w-16 bg-success/20 text-success rounded-full grid place-items-center mb-6">
           <CheckCircle2 className="h-8 w-8" />
         </div>
-        <h1 className="text-display text-3xl mb-4">Order Confirmed!</h1>
-        <p className="text-ink-soft mb-8">
-          Thank you for shopping with Shravani Agroproducts Enterprises LLP. Your order #SA-
-          {Math.floor(Math.random() * 10000)} has been placed successfully.
+        <h1 className="text-display text-3xl mb-4">Order Placed!</h1>
+        <p className="text-ink-soft mb-2">
+          Order <span className="font-semibold text-ink">{placedOrder?.orderNumber}</span> created.
         </p>
-        <Button onClick={() => navigate({ to: "/" })} className="w-full">
-          Continue Shopping
-        </Button>
+        <p className="text-ink-soft text-sm mb-6">
+          {placedOrder?.lines.length} product(s) · Total {formatINR(placedOrder?.total ?? 0)} · via Cashfree
+        </p>
+
+        {placedOrder?.cfPaymentLink && (
+          <div className="rounded-xl bg-surface p-5 mb-6 border border-border text-sm text-left">
+            <div className="flex items-center gap-2 mb-3">
+              <ExternalLink className="h-4 w-4 text-primary" />
+              <span className="font-medium text-ink">Complete Your Payment</span>
+            </div>
+            <p className="text-ink-soft text-xs mb-3">
+              Your order is pending payment. Pay securely via Cashfree to confirm your order.
+            </p>
+            <div className="space-y-2 mb-4 border-b border-border pb-4">
+              {placedOrder.lines.map((l: any) => (
+                <div key={l.slug} className="flex justify-between text-xs">
+                  <span className="text-ink-soft flex-1 pr-2 truncate">
+                    {l.qty}x {l.name} <span className="text-ink-soft/60">({l.packSize})</span>
+                  </span>
+                  <span className="font-medium tabular-nums">{formatINR(l.price * l.qty)}</span>
+                </div>
+              ))}
+            </div>
+            <a
+              href={placedOrder.cfPaymentLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 w-full h-11 rounded-full bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 mb-2"
+            >
+              Pay {formatINR(placedOrder.total)} via Cashfree <ExternalLink className="h-3.5 w-3.5" />
+            </a>
+            <p className="text-[0.65rem] text-ink-soft text-center">
+              You will be redirected to Cashfree payment page. Your order will be confirmed after payment.
+            </p>
+          </div>
+        )}
+
+        {!placedOrder?.cfPaymentLink && (
+          <div className="rounded-xl bg-success/5 border border-success/20 p-4 mb-6 text-sm">
+            <p className="text-success font-medium">Payment completed successfully!</p>
+          </div>
+        )}
+
+        <div className="flex flex-col gap-2">
+          <Button onClick={() => navigate({ to: "/dashboard/orders" })} className="w-full">
+            View My Orders
+          </Button>
+          <Button onClick={() => navigate({ to: "/" })} variant="outline" className="w-full">
+            Continue Shopping
+          </Button>
+        </div>
       </div>
     );
   }
@@ -107,7 +230,7 @@ function Checkout() {
           {currentStep === 0 && (
             <div className="surface-card p-6 sm:p-8">
               <h2 className="text-xl font-medium mb-6">Shipping Address</h2>
-              {!user && (
+              {!currentUser && (
                 <div className="mb-6 p-4 rounded-xl bg-primary/5 border border-primary/20 text-sm">
                   Already have an account?{" "}
                   <button
@@ -219,33 +342,73 @@ function Checkout() {
           {currentStep === 2 && (
             <div className="surface-card p-6 sm:p-8">
               <h2 className="text-xl font-medium mb-6">Payment Method</h2>
+              <p className="text-sm text-ink-soft mb-6">
+                Choose your preferred payment method. All payments are processed securely via{" "}
+                <span className="font-medium text-ink">Cashfree</span>.
+              </p>
               <RadioGroup
                 value={paymentMethod}
-                onValueChange={setPaymentMethod}
+                onValueChange={(v) => setPaymentMethod(v as PaymentMethod)}
                 className="space-y-4"
               >
                 <div
-                  className={`flex items-center space-x-3 rounded-xl border p-4 cursor-pointer transition-colors ${paymentMethod === "razorpay" ? "border-primary bg-primary/5" : "border-border bg-background"}`}
-                  onClick={() => setPaymentMethod("razorpay")}
+                  className={`flex items-center space-x-3 rounded-xl border p-4 cursor-pointer transition-colors ${paymentMethod === "cashfree_upi" ? "border-primary bg-primary/5" : "border-border bg-background"}`}
+                  onClick={() => setPaymentMethod("cashfree_upi")}
                 >
-                  <RadioGroupItem value="razorpay" id="razorpay" />
-                  <div className="flex-1">
-                    <Label htmlFor="razorpay" className="text-base cursor-pointer">
-                      UPI / Credit Card / Netbanking
-                    </Label>
-                    <p className="text-sm text-ink-soft">Secured by Razorpay</p>
+                  <RadioGroupItem value="cashfree_upi" id="cashfree_upi" />
+                  <div className="flex items-center gap-3 flex-1">
+                    <Smartphone className="h-5 w-5 text-primary" />
+                    <div>
+                      <Label htmlFor="cashfree_upi" className="text-base cursor-pointer">
+                        UPI
+                      </Label>
+                      <p className="text-sm text-ink-soft">Google Pay, PhonePe, Paytm</p>
+                    </div>
                   </div>
                 </div>
                 <div
-                  className={`flex items-center space-x-3 rounded-xl border p-4 cursor-pointer transition-colors ${paymentMethod === "cod" ? "border-primary bg-primary/5" : "border-border bg-background"}`}
-                  onClick={() => setPaymentMethod("cod")}
+                  className={`flex items-center space-x-3 rounded-xl border p-4 cursor-pointer transition-colors ${paymentMethod === "cashfree_card" ? "border-primary bg-primary/5" : "border-border bg-background"}`}
+                  onClick={() => setPaymentMethod("cashfree_card")}
                 >
-                  <RadioGroupItem value="cod" id="cod" />
-                  <div className="flex-1">
-                    <Label htmlFor="cod" className="text-base cursor-pointer">
-                      Cash on Delivery
-                    </Label>
-                    <p className="text-sm text-ink-soft">Pay at your doorstep</p>
+                  <RadioGroupItem value="cashfree_card" id="cashfree_card" />
+                  <div className="flex items-center gap-3 flex-1">
+                    <CreditCard className="h-5 w-5 text-primary" />
+                    <div>
+                      <Label htmlFor="cashfree_card" className="text-base cursor-pointer">
+                        Credit / Debit Card
+                      </Label>
+                      <p className="text-sm text-ink-soft">Visa, Mastercard, RuPay</p>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className={`flex items-center space-x-3 rounded-xl border p-4 cursor-pointer transition-colors ${paymentMethod === "cashfree_netbanking" ? "border-primary bg-primary/5" : "border-border bg-background"}`}
+                  onClick={() => setPaymentMethod("cashfree_netbanking")}
+                >
+                  <RadioGroupItem value="cashfree_netbanking" id="cashfree_netbanking" />
+                  <div className="flex items-center gap-3 flex-1">
+                    <Building2 className="h-5 w-5 text-primary" />
+                    <div>
+                      <Label htmlFor="cashfree_netbanking" className="text-base cursor-pointer">
+                        Net Banking
+                      </Label>
+                      <p className="text-sm text-ink-soft">All major banks</p>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className={`flex items-center space-x-3 rounded-xl border p-4 cursor-pointer transition-colors ${paymentMethod === "cashfree_wallet" ? "border-primary bg-primary/5" : "border-border bg-background"}`}
+                  onClick={() => setPaymentMethod("cashfree_wallet")}
+                >
+                  <RadioGroupItem value="cashfree_wallet" id="cashfree_wallet" />
+                  <div className="flex items-center gap-3 flex-1">
+                    <Wallet className="h-5 w-5 text-primary" />
+                    <div>
+                      <Label htmlFor="cashfree_wallet" className="text-base cursor-pointer">
+                        Wallet
+                      </Label>
+                      <p className="text-sm text-ink-soft">Paytm, Mobikwik, Freecharge</p>
+                    </div>
                   </div>
                 </div>
               </RadioGroup>
@@ -275,8 +438,8 @@ function Checkout() {
                     </p>
                   </div>
                   <div>
-                    <h4 className="font-medium text-ink mb-1">Payment Method</h4>
-                    <p className="text-ink-soft uppercase">{paymentMethod}</p>
+                    <h4 className="font-medium text-ink mb-1">Payment via Cashfree</h4>
+                    <p className="text-ink-soft capitalize">{paymentMethod.replace("cashfree_", "")}</p>
                   </div>
                 </div>
 
@@ -301,8 +464,8 @@ function Checkout() {
                 <Button variant="ghost" onClick={handleBack}>
                   Back
                 </Button>
-                <Button onClick={placeOrder} size="lg">
-                  Place Order
+                <Button onClick={handlePlaceOrder} size="lg" disabled={processing}>
+                  {processing ? "Processing..." : "Place Order"}
                 </Button>
               </div>
             </div>

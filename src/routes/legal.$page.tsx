@@ -12,7 +12,7 @@ const pages: Record<string, { title: string; content: string }> = {
 Shravani Agroproducts Enterprises LLP ("Shravani Agroproducts Enterprises LLP", "we", "us", or "our"), incorporated under the Limited Liability Partnership Act, 2008, operates the agricultural marketplace platform at shravaniagro.com. This Privacy Policy explains how we collect, use, disclose, and protect your personal information.
 
 ## 2. Information We Collect
-We collect information you provide directly to us, including your name, email address, phone number, postal address, farm profile details, payment information (processed securely via Razorpay/Stripe — we do not store card data), and any content you submit (reviews, advisory requests).
+We collect information you provide directly to us, including your name, email address, phone number, postal address, farm profile details, payment information (processed securely via Cashfree — we do not store card data), and any content you submit (reviews, advisory requests).
 
 We also automatically collect device information, IP addresses, browser type, and usage analytics through Google Analytics 4 and Google Tag Manager.
 
@@ -96,13 +96,26 @@ Products may be returned within 7 days of delivery if they are: damaged during t
 Log in to your account, navigate to Order History, select the order, and click "Request Return". Upload clear photos of the damaged/incorrect item. Our team will review the request within 48 hours.
 
 ## Refund Processing
-Approved refunds are processed to the original payment method within 5–7 business days. COD orders are refunded via bank transfer; please provide your account details during the return request.
+Approved refunds are processed to the original payment method within 5–7 business days. Cashfree refunds are initiated automatically and reflect within 3–5 business days.
 
 ## Cancellations
 Orders may be cancelled before dispatch (usually within 2 hours of placement). Once dispatched, cancellations are not possible; you may initiate a return after delivery.
 
 ## Damaged in Transit
 If your order arrives visibly damaged, please refuse the delivery and note this on the delivery receipt. Contact our support team immediately with photos for priority resolution.
+    `,
+  },
+  warranty: {
+    title: "Warranty Claims",
+    content: `
+## Machinery & Equipment
+Farm machinery, sprayers, and electronic equipment come with standard manufacturer warranties, usually ranging from 6 months to 1 year. The specific warranty period is mentioned on the product page and invoice.
+
+## How to Claim
+In case of a defect within the warranty period, please contact our support team with your order ID, invoice, and a video demonstrating the issue. We will coordinate with the manufacturer's authorized service center.
+
+## Consumables
+Seeds, fertilizers, and crop protection products do not carry a hardware warranty. However, if you suspect a quality issue, please report it within 3 days of delivery so we can investigate the batch quality with the manufacturer.
     `,
   },
 };

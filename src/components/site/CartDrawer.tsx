@@ -2,6 +2,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { X, Minus, Plus, ShoppingBag } from "lucide-react";
 import { useCart } from "@/lib/cart-store";
 import { formatINR } from "@/lib/catalog";
+import { Link } from "@tanstack/react-router";
 
 export function CartDrawer() {
   const cart = useCart();
@@ -16,7 +17,7 @@ export function CartDrawer() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-50 bg-ink/40"
+            className="fixed inset-0 z-50 bg-[oklch(0_0_0/0.5)]"
             onClick={cart.close}
           />
           <motion.aside
@@ -122,9 +123,9 @@ export function CartDrawer() {
                   <div className="rounded-xl bg-background border border-border px-3 py-2.5 text-xs text-ink-soft">
                     Shipping and dealer discount calculated at checkout.
                   </div>
-                  <button className="w-full h-12 rounded-full bg-primary text-primary-foreground font-medium hover:opacity-90 transition-opacity">
+                  <Link to="/checkout" onClick={cart.close} className="block w-full h-12 rounded-full bg-primary text-primary-foreground font-medium hover:opacity-90 transition-opacity flex items-center justify-center">
                     Checkout · {formatINR(cart.subtotal)}
-                  </button>
+                  </Link>
                   <button
                     onClick={cart.close}
                     className="w-full text-sm text-ink-soft hover:text-ink"

@@ -11,6 +11,10 @@ import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { CartDrawer } from "@/components/site/CartDrawer";
 import { CartProvider } from "@/lib/cart-store";
+import { AdminAuthProvider } from "@/lib/admin-auth";
+import { Toaster } from "sonner";
+import { UserStoreProvider } from "@/lib/user-store";
+import { OrderStoreProvider } from "@/lib/order-store";
 
 function NotFoundComponent() {
   return (
@@ -77,16 +81,23 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   return (
     <QueryClientProvider client={queryClient}>
-      <CartProvider>
-        <div className="flex min-h-screen flex-col">
-          <Header />
-          <main className="flex-1">
-            <Outlet />
-          </main>
-          <Footer />
-        </div>
-        <CartDrawer />
-      </CartProvider>
+      <AdminAuthProvider>
+        <UserStoreProvider>
+        <OrderStoreProvider>
+        <CartProvider>
+          <div className="flex min-h-screen flex-col">
+            <Header />
+            <main className="flex-1">
+              <Outlet />
+            </main>
+            <Footer />
+          </div>
+          <CartDrawer />
+          <Toaster position="bottom-right" richColors />
+        </CartProvider>
+        </OrderStoreProvider>
+        </UserStoreProvider>
+      </AdminAuthProvider>
     </QueryClientProvider>
   );
 }

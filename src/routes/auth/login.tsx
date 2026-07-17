@@ -1,9 +1,10 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
-import { supabase } from "@/lib/supabase";
+import { useUserStore } from "@/lib/user-store";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Clock, AlertTriangle } from "lucide-react";
 
 export const Route = createFileRoute("/auth/login")({
   component: Login,
@@ -14,17 +15,24 @@ function Login() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [pendingVerification, setPendingVerification] = useState(false);
+  const { signInUser } = useUserStore();
   const navigate = useNavigate();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
-    if (error) {
-      setError(error.message);
+    setPendingVerification(false);
+
+    const result = signInUser(email, password);
+    if (!result.success) {
+      setError(result.error || "Sign in failed");
+      if (result.error?.includes("pending")) {
+        setPendingVerification(true);
+      }
     } else {
-      navigate({ to: "/" });
+      navigate({ to: "/dashboard" });
     }
     setLoading(false);
   };
@@ -63,7 +71,20 @@ function Login() {
           </div>
         </div>
 
-        {error && <div className="text-sm text-destructive font-medium">{error}</div>}
+        {error && (
+          <div className={`text-sm font-medium px-3 py-2 rounded-lg flex items-start gap-2 ${
+            pendingVerification
+              ? "text-amber bg-amber/10"
+              : "text-destructive bg-destructive/10"
+          }`}>
+            {pendingVerification ? (
+              <Clock className="h-4 w-4 mt-0.5 flex-shrink-0" />
+            ) : (
+              <AlertTriangle className="h-4 w-4 mt-0.5 flex-shrink-0" />
+            )}
+            <span>{error}</span>
+          </div>
+        )}
 
         <Button type="submit" className="w-full" disabled={loading}>
           {loading ? "Signing in..." : "Sign in"}

@@ -1,50 +1,50 @@
 import { Link } from "@tanstack/react-router";
 import { Mark } from "./Logo";
+import { toast } from "sonner";
 
 const cols = [
   {
     title: "Shop",
     links: [
-      "Seeds & Saplings",
-      "Crop Protection",
-      "Plant Nutrition",
-      "Farm Machinery",
-      "Irrigation",
-
-      "Organic Farming",
+      { label: "Seeds & Saplings", path: "/products?category=seeds" },
+      { label: "Crop Protection", path: "/products?category=crop-protection" },
+      { label: "Plant Nutrition", path: "/products?category=fertilizers" },
+      { label: "Farm Machinery", path: "/products?category=farm-machinery" },
+      { label: "Irrigation", path: "/products?category=irrigation" },
+      { label: "Organic Farming", path: "/products?category=organic-fertilizers" },
     ],
   },
   {
     title: "Company",
     links: [
-      "Our Story",
-      "Leadership",
-      "Infrastructure",
-      "Careers",
-      "Press",
-      "Sustainability report",
+      { label: "Our Story", path: "/about" },
+      { label: "Dealer Program", path: "/dealer-registration" },
+      { label: "Knowledge Centre", path: "/knowledge" },
+      { label: "Blog", path: "/blog/cotton-kharif-2026" },
+      { label: "Contact", path: "/contact" },
+      { label: "Legal", path: "/legal/privacy" },
     ],
   },
   {
     title: "Farmers & Dealers",
     links: [
-      "Become a dealer",
-      "Distributor portal",
-      "Bulk & corporate",
-      "Crop advisory",
-      "Loyalty program",
-      "Referral",
+      { label: "Become a dealer", path: "/dealer-registration" },
+      { label: "Distributor portal", path: "/auth/dashboard" },
+      { label: "Bulk & corporate", path: "/contact" },
+      { label: "Crop advisory", path: "/auth/farmer" },
+      { label: "Loyalty program", path: "/auth/dashboard" },
+      { label: "Referral", path: "/auth/dashboard" },
     ],
   },
   {
     title: "Support",
     links: [
-      "Track order",
-      "Shipping & delivery",
-      "Returns & refunds",
-      "Warranty claims",
-      "FAQs",
-      "Contact us",
+      { label: "Track order", path: "/track" },
+      { label: "Shipping & delivery", path: "/legal/shipping" },
+      { label: "Returns & refunds", path: "/legal/returns" },
+      { label: "Warranty claims", path: "/legal/warranty" },
+      { label: "FAQs", path: "/contact" },
+      { label: "Contact us", path: "/contact" },
     ],
   },
 ];
@@ -90,12 +90,12 @@ export function Footer() {
                 <h4 className="text-eyebrow mb-4">{c.title}</h4>
                 <ul className="space-y-2.5">
                   {c.links.map((l) => (
-                    <li key={l}>
+                    <li key={l.label}>
                       <Link
-                        to="/"
+                        to={l.path}
                         className="text-sm text-ink-soft hover:text-ink transition-colors"
                       >
-                        {l}
+                        {l.label}
                       </Link>
                     </li>
                   ))}
@@ -110,7 +110,11 @@ export function Footer() {
             <p className="text-sm text-ink-soft leading-relaxed">
               A monthly note from our agronomy desk. Crop calendars, pest alerts, subsidy news.
             </p>
-            <form className="mt-4 flex gap-2" onSubmit={(e) => e.preventDefault()}>
+            <form className="mt-4 flex gap-2" onSubmit={(e) => {
+              e.preventDefault();
+              toast.success("Subscribed! You will receive our next Field Notes issue.");
+              (e.target as HTMLFormElement).reset();
+            }}>
               <input
                 type="email"
                 required
@@ -134,11 +138,11 @@ export function Footer() {
             the Limited Liability Partnership Act, 2008
           </div>
           <div className="flex flex-wrap items-center gap-4">
-            <Link to="/">Privacy</Link>
-            <Link to="/">Terms</Link>
-            <Link to="/">Shipping</Link>
-            <Link to="/">Returns</Link>
-            <Link to="/">Sitemap</Link>
+            <Link to="/legal/privacy">Privacy</Link>
+            <Link to="/legal/terms">Terms</Link>
+            <Link to="/legal/shipping">Shipping</Link>
+            <Link to="/legal/returns">Returns</Link>
+            <Link to="/catalog">Sitemap</Link>
           </div>
         </div>
       </div>

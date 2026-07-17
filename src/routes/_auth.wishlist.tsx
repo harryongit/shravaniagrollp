@@ -1,5 +1,4 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useAuth } from "@/lib/auth";
 import { Heart, ShoppingCart, Trash2 } from "lucide-react";
 import { useCart } from "@/lib/cart-store";
 import { products, formatINR } from "@/lib/catalog";

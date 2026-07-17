@@ -69,7 +69,7 @@ export function ProductCard({ product }: { product: Product }) {
           </div>
           <button
             onClick={() => cart.add(product)}
-            className="h-9 px-4 rounded-full bg-ink text-background text-xs font-medium hover:bg-primary transition-colors"
+            className="h-9 px-4 rounded-full bg-ink text-background dark:bg-[oklch(0.16_0.015_90)] dark:text-[oklch(0.976_0.012_90)] text-xs font-medium hover:bg-primary transition-colors"
           >
             Add
           </button>

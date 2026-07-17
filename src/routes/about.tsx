@@ -10,16 +10,16 @@ function About() {
   return (
     <div className="pb-24">
       {/* Hero */}
-      <section className="bg-ink text-background pt-24 pb-32 px-4 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-20 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary via-ink to-ink"></div>
+      <section className="bg-ink text-background dark:bg-[oklch(0.16_0.015_90)] dark:text-[oklch(0.976_0.012_90)] pt-24 pb-32 px-4 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-20 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary via-ink to-ink dark:from-primary dark:via-[oklch(0.16_0.015_90)] dark:to-[oklch(0.16_0.015_90)]"></div>
         <div className="container-x relative max-w-4xl text-center">
           <div className="text-eyebrow text-accent mb-6">Our Story</div>
-          <h1 className="text-display text-4xl sm:text-5xl lg:text-6xl leading-[1.05]">
+          <h1 className="text-display text-4xl sm:text-5xl lg:text-6xl leading-[1.05] text-[oklch(0.976_0.012_90)] dark:text-[oklch(0.976_0.012_90)]">
             Rooted in heritage.
             <br />
             Driven by agronomy.
           </h1>
-          <p className="mt-6 text-lg text-background/80 max-w-2xl mx-auto leading-relaxed">
+          <p className="mt-6 text-lg text-[oklch(0.976_0.012_90)/0.8] max-w-2xl mx-auto leading-relaxed">
             Shravani Agroproducts Enterprises LLP was founded to bridge the gap between world-class
             agricultural inputs and the working farmer. We don't just sell products; we assemble
             complete crop solutions.
@@ -87,9 +87,11 @@ function About() {
             </ul>
           </div>
           <div className="relative aspect-square sm:aspect-video lg:aspect-square rounded-3xl overflow-hidden bg-surface">
-            {/* Placeholder for warehouse image */}
             <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 flex items-center justify-center">
-              <span className="text-ink-soft text-sm">Warehouse Image Placeholder</span>
+              <div className="text-center">
+                <div className="text-4xl mb-2">□</div>
+                <span className="text-ink-soft text-sm">State-of-the-art warehouse facility</span>
+              </div>
             </div>
           </div>
         </div>

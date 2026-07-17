@@ -28,11 +28,10 @@ function AdminSettings() {
             <button
               key={t.id}
               onClick={() => setTab(t.id)}
-              className={`flex items-center gap-3 w-full px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${
-                tab === t.id
+              className={`flex items-center gap-3 w-full px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${tab === t.id
                   ? "bg-primary/10 text-primary"
                   : "text-ink-soft hover:text-ink hover:bg-surface"
-              }`}
+                }`}
             >
               <t.icon className="h-4 w-4" />
               {t.label}
@@ -70,7 +69,7 @@ function AdminSettings() {
                   </div>
                   <div className="space-y-2">
                     <Label>Helpline Number</Label>
-                    <Input defaultValue="1800-000-0000" />
+                    <Input defaultValue="1800-180-1551" />
                   </div>
                 </div>
                 <div className="pt-2">

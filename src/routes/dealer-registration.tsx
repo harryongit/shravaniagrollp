@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { CheckCircle2, Users, BarChart3, Store } from "lucide-react";
+import { toast } from "sonner";
 
 export const Route = createFileRoute("/dealer-registration")({
   component: DealerRegistration,
@@ -13,13 +14,13 @@ function DealerRegistration() {
   return (
     <div className="pb-24">
       {/* Hero */}
-      <section className="bg-ink text-background pt-24 pb-32 px-4">
+      <section className="bg-ink dark:bg-ink text-background dark:text-background pt-24 pb-32 px-4">
         <div className="container-x max-w-4xl text-center relative">
-          <div className="text-eyebrow text-accent mb-4">Partner Program</div>
-          <h1 className="text-display text-4xl sm:text-5xl lg:text-6xl leading-tight">
+          <div className="text-eyebrow text-primary dark:text-accent mb-4">Partner Program</div>
+          <h1 className="text-display text-4xl sm:text-5xl lg:text-6xl leading-tight text-background dark:text-foreground">
             Become a Shravani Agroproducts Enterprises LLP Authorised Dealer
           </h1>
-          <p className="mt-6 text-lg text-background/70 max-w-2xl mx-auto leading-relaxed">
+          <p className="mt-6 text-lg text-background/80 dark:text-foreground/70 max-w-2xl mx-auto leading-relaxed">
             Join our network of 800+ dealers across India. Unlock dealer pricing, credit facilities,
             dedicated support, and incentive programs.
           </p>
@@ -76,7 +77,11 @@ function DealerRegistration() {
           </div>
 
           <div className="surface-card p-6 sm:p-10">
-            <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
+            <form className="space-y-5" onSubmit={(e) => {
+              e.preventDefault();
+              toast.success("Application received! Our team will review and get back to you within 3 days.");
+              (e.target as HTMLFormElement).reset();
+            }}>
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label>Business / Shop Name</Label>

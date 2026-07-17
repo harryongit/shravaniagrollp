@@ -58,9 +58,8 @@ function KnowledgeHub() {
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {sections.map((s) => (
-          <Link
+          <div
             key={s.title}
-            to={s.path as string}
             className="group surface-card p-6 flex flex-col items-start hover:border-primary/40 hover:-translate-y-1 transition-all"
           >
             <div className="grid h-12 w-12 place-items-center rounded-xl bg-primary/10 text-primary mb-4">
@@ -68,10 +67,8 @@ function KnowledgeHub() {
             </div>
             <h3 className="text-xl font-medium text-ink mb-2">{s.title}</h3>
             <p className="text-sm text-ink-soft mb-4">{s.desc}</p>
-            <div className="mt-auto text-sm font-medium text-primary flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-              Explore <span aria-hidden="true">&rarr;</span>
-            </div>
-          </Link>
+            <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-primary/10 text-primary">Coming soon</span>
+          </div>
         ))}
       </div>
 
@@ -79,29 +76,31 @@ function KnowledgeHub() {
       <div className="mt-24">
         <div className="flex items-end justify-between mb-8">
           <h2 className="text-display text-3xl">Latest from the desk</h2>
-          <Link to="/" className="text-sm font-medium text-primary hover:underline">
+          <Link to="/blog" className="text-sm font-medium text-primary hover:underline">
             View all articles &rarr;
           </Link>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
-          {[1, 2, 3].map((i) => (
-            <div key={i} className="group cursor-pointer">
+          {[
+            { slug: "soil-microbiology-kharif", title: "Understanding soil microbiology for better Kharif yields", excerpt: "A deep dive into how beneficial microbes interact with plant roots to improve nutrient uptake and stress tolerance." },
+            { slug: "npk-management-rabi", title: "NPK management strategies for Rabi season 2026", excerpt: "Optimise your fertiliser schedule with soil-test-based recommendations for wheat, mustard, and gram." },
+            { slug: "drip-irrigation-guide", title: "The complete guide to drip irrigation economics", excerpt: "Upfront costs, subsidy linkages, and payback periods for small and marginal farmers." },
+          ].map((a) => (
+            <Link key={a.slug} to={`/blog/${a.slug}`} className="group cursor-pointer">
               <div className="aspect-[4/3] rounded-2xl bg-surface mb-4 overflow-hidden relative">
-                {/* Image Placeholder */}
                 <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 to-accent/10" />
               </div>
               <div className="text-xs font-medium text-primary mb-2 uppercase tracking-wider">
                 Expert Article
               </div>
               <h3 className="text-lg font-medium text-ink leading-snug group-hover:text-primary transition-colors">
-                Understanding soil microbiology for better Kharif yields
+                {a.title}
               </h3>
               <p className="mt-2 text-sm text-ink-soft line-clamp-2">
-                A deep dive into how beneficial microbes interact with plant roots to improve
-                nutrient uptake and stress tolerance.
+                {a.excerpt}
               </p>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

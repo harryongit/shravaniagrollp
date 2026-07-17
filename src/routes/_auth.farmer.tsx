@@ -13,6 +13,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { toast } from "sonner";
+import { Link } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/_auth/farmer")({
   component: FarmerDashboard,
@@ -83,7 +85,7 @@ function FarmerDashboard() {
             <h3 className="font-medium text-ink flex items-center gap-2">
               <Sprout className="h-5 w-5 text-primary" /> My Crops & Calendar
             </h3>
-            <Button variant="ghost" size="sm">
+            <Button variant="ghost" size="sm" onClick={() => toast("Profile editor coming soon.")}>
               Edit Farm Profile
             </Button>
           </div>
@@ -121,7 +123,9 @@ function FarmerDashboard() {
               <span className="font-medium text-ink">Recommended for Cotton:</span>
               <span className="text-ink-soft ml-2">NPK 19:19:19 Water Soluble Fertilizer</span>
             </div>
-            <Button size="sm">View Product</Button>
+            <Link to="/products/npk-191919">
+              <Button size="sm">View Product</Button>
+            </Link>
           </div>
         </div>
       </div>
@@ -138,7 +142,11 @@ function FarmerDashboard() {
               will respond within 24 hours.
             </p>
 
-            <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+            <form className="space-y-4" onSubmit={(e) => {
+              e.preventDefault();
+              toast.success("Advisory request submitted. An expert will reply within 24 hours.");
+              (e.target as HTMLFormElement).reset();
+            }}>
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label>Select Crop</Label>
@@ -188,7 +196,10 @@ function FarmerDashboard() {
               <p className="text-xs text-ink-soft line-clamp-2">
                 The photos show early stage whitefly infestation. Recommend spraying...
               </p>
-              <button className="text-xs font-medium text-primary hover:underline">
+              <button 
+                className="text-xs font-medium text-primary hover:underline"
+                onClick={() => toast("Full expert reply panel coming soon.")}
+              >
                 Read expert reply
               </button>
             </div>

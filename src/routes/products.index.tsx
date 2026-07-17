@@ -7,6 +7,7 @@ import { z } from "zod";
 
 const productSearchSchema = z.object({
   category: z.string().optional().catch("all"),
+  q: z.string().optional(),
 });
 
 export const Route = createFileRoute("/products/")({
@@ -26,10 +27,10 @@ export const Route = createFileRoute("/products/")({
 
 function Catalog() {
   const navigate = Route.useNavigate();
-  const { category: cat = "all" } = Route.useSearch();
+  const { category: cat = "all", q = "" } = Route.useSearch();
   const setCat = (newCat: string) => {
     navigate({
-      search: (prev: { category?: string }) => ({
+      search: (prev: { category?: string; q?: string }) => ({
         ...prev,
         category: newCat === "all" ? undefined : newCat,
       }),
@@ -38,6 +39,15 @@ function Catalog() {
   const [sort, setSort] = useState<string>("relevance");
 
   let list = cat === "all" ? products : products.filter((p) => p.category === cat);
+  
+  if (q) {
+    const qLower = q.toLowerCase();
+    list = list.filter((p) => 
+      p.name.toLowerCase().includes(qLower) || 
+      p.description.toLowerCase().includes(qLower)
+    );
+  }
+
   if (sort === "price-low") list = [...list].sort((a, b) => a.price - b.price);
   if (sort === "price-high") list = [...list].sort((a, b) => b.price - a.price);
   if (sort === "rating") list = [...list].sort((a, b) => b.rating - a.rating);
@@ -58,7 +68,7 @@ function Catalog() {
         <div>
           <div className="text-eyebrow">Catalog</div>
           <h1 className="mt-2 text-display text-3xl sm:text-4xl">
-            {cat === "all"
+            {q ? `Search results for "${q}"` : cat === "all"
               ? "All agricultural inputs"
               : categories.find((c) => c.slug === cat)?.name}
           </h1>
@@ -142,7 +152,7 @@ function Catalog() {
             <div className="rounded-2xl border border-dashed border-border p-12 text-center">
               <div className="text-display text-lg">No products match those filters.</div>
               <button
-                onClick={() => setCat("all")}
+                onClick={() => navigate({ search: { category: undefined, q: undefined } })}
                 className="mt-3 text-sm text-primary hover:underline"
               >
                 Reset filters

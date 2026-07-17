@@ -4,11 +4,12 @@ import { Search, ShoppingBag, Heart, User, Menu, X, ChevronDown, ArrowRight } fr
 import { Logo } from "./Logo";
 import { ThemeToggle } from "./ThemeToggle";
 import { useCart } from "@/lib/cart-store";
-import { categories, crops } from "@/lib/catalog";
+import { categories } from "@/lib/catalog";
+import { useRouter } from "@tanstack/react-router";
 
 const nav = [
   { label: "Shop", key: "shop" },
-  { label: "Crops", key: "crops" },
+
   { label: "Knowledge", key: "knowledge" },
   { label: "For Dealers", key: "dealers" },
 ];
@@ -18,6 +19,17 @@ export function Header() {
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const cart = useCart();
+  const router = useRouter();
+
+  const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const q = formData.get("q")?.toString().trim();
+    if (q) {
+      router.navigate({ to: "/products", search: { q } });
+      setMobileOpen(false);
+    }
+  };
 
   useEffect(() => {
     const on = () => setScrolled(window.scrollY > 8);
@@ -38,21 +50,20 @@ export function Header() {
             </span>
           </p>
           <div className="hidden md:flex items-center gap-4 opacity-90">
-            <Link to="/" className="hover:opacity-100">
+            <Link to="/track" className="hover:opacity-100">
               Track order
             </Link>
             <span className="opacity-40">·</span>
-            <Link to="/" className="hover:opacity-100">
-              Farmer helpline · 1800-000-000
+            <Link to="/contact" className="hover:opacity-100">
+              Farmer helpline · 1800-180-1551
             </Link>
           </div>
         </div>
       </div>
 
       <header
-        className={`sticky top-0 z-40 transition-all ${
-          scrolled ? "glass-header" : "bg-background border-b border-transparent"
-        }`}
+        className={`sticky top-0 z-40 transition-all ${scrolled ? "glass-header" : "bg-background border-b border-transparent"
+          }`}
       >
         <div className="container-x flex items-center gap-6 py-3.5">
           <button
@@ -73,11 +84,10 @@ export function Header() {
                 onMouseEnter={() => setOpenMenu(n.key)}
                 onFocus={() => setOpenMenu(n.key)}
                 onClick={() => setOpenMenu(openMenu === n.key ? null : n.key)}
-                className={`px-3.5 py-2 rounded-md text-[0.92rem] font-medium inline-flex items-center gap-1 transition-colors ${
-                  openMenu === n.key
-                    ? "bg-surface text-ink"
-                    : "text-ink-soft hover:text-ink hover:bg-surface"
-                }`}
+                className={`px-3.5 py-2 rounded-md text-[0.92rem] font-medium inline-flex items-center gap-1 transition-colors ${openMenu === n.key
+                  ? "bg-surface text-ink"
+                  : "text-ink-soft hover:text-ink hover:bg-surface"
+                  }`}
                 aria-expanded={openMenu === n.key}
               >
                 {n.label}
@@ -88,30 +98,31 @@ export function Header() {
 
           {/* Search */}
           <div className="hidden md:flex flex-1 max-w-xl mx-auto">
-            <div className="relative w-full">
+            <form onSubmit={handleSearch} className="relative w-full">
               <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-ink-soft" />
               <input
                 type="search"
-                placeholder="Search seeds, fertilizers, pesticides, machinery…"
+                name="q"
+                placeholder="Search here"
                 className="w-full h-11 rounded-full bg-surface hairline pl-10 pr-4 text-sm placeholder:text-ink-soft focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/40"
               />
               <kbd className="hidden xl:inline absolute right-3 top-1/2 -translate-y-1/2 text-[0.65rem] tracking-widest text-ink-soft border border-border rounded px-1.5 py-0.5">
                 ⌘K
               </kbd>
-            </div>
+            </form>
           </div>
 
           <div className="ml-auto flex items-center gap-1.5">
             <ThemeToggle />
             <Link
-              to="/"
+              to="/auth/dashboard"
               aria-label="Account"
               className="hidden sm:grid h-9 w-9 place-items-center rounded-full border border-border text-ink-soft hover:text-ink hover:bg-surface"
             >
               <User className="h-4 w-4" />
             </Link>
             <Link
-              to="/"
+              to="/auth/wishlist"
               aria-label="Wishlist"
               className="hidden sm:grid h-9 w-9 place-items-center rounded-full border border-border text-ink-soft hover:text-ink hover:bg-surface"
             >
@@ -185,29 +196,7 @@ export function Header() {
                   </div>
                 </div>
               )}
-              {openMenu === "crops" && (
-                <div>
-                  <div className="text-eyebrow mb-4">Shop by crop</div>
-                  <div className="grid grid-cols-4 gap-3">
-                    {crops.map((c) => (
-                      <Link
-                        key={c.slug}
-                        to="/products"
-                        onClick={() => setOpenMenu(null)}
-                        className="flex items-center justify-between rounded-xl border border-border p-4 hover:border-primary/40 hover:bg-surface transition-colors group"
-                      >
-                        <div>
-                          <div className="font-medium text-ink group-hover:text-primary">
-                            {c.name}
-                          </div>
-                          <div className="text-xs text-ink-soft mt-0.5">{c.season}</div>
-                        </div>
-                        <span className="text-ink-soft group-hover:text-primary">→</span>
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              )}
+
               {openMenu === "knowledge" && (
                 <div className="grid grid-cols-3 gap-8">
                   {[
@@ -236,7 +225,7 @@ export function Header() {
                       d: "Long-form writing from agronomists, breeders and soil scientists.",
                     },
                   ].map((k) => (
-                    <Link key={k.t} to="/" onClick={() => setOpenMenu(null)} className="group">
+                    <Link key={k.t} to="/knowledge" onClick={() => setOpenMenu(null)} className="group">
                       <div className="text-eyebrow mb-2 group-hover:text-primary transition-colors">
                         {k.t}
                       </div>
@@ -263,7 +252,7 @@ export function Header() {
                   ].map((k) => (
                     <Link
                       key={k.t}
-                      to="/"
+                      to="/dealer-registration"
                       onClick={() => setOpenMenu(null)}
                       className="rounded-2xl border border-border p-6 hover:border-primary/40 hover:bg-surface transition-colors"
                     >
@@ -282,7 +271,7 @@ export function Header() {
       {/* Mobile drawer */}
       {mobileOpen && (
         <div className="fixed inset-0 z-50 lg:hidden">
-          <div className="absolute inset-0 bg-ink/40" onClick={() => setMobileOpen(false)} />
+          <div className="absolute inset-0 bg-[oklch(0_0_0/0.5)]" onClick={() => setMobileOpen(false)} />
           <div className="absolute inset-y-0 left-0 w-[86%] max-w-sm bg-background shadow-xl flex flex-col">
             <div className="flex items-center justify-between p-4 border-b border-border">
               <Logo />
@@ -295,14 +284,15 @@ export function Header() {
               </button>
             </div>
             <div className="p-4">
-              <div className="relative">
+              <form onSubmit={handleSearch} className="relative">
                 <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-ink-soft" />
                 <input
                   type="search"
+                  name="q"
                   placeholder="Search products…"
-                  className="w-full h-11 rounded-full bg-surface hairline pl-10 pr-4 text-sm"
+                  className="w-full h-11 rounded-full bg-surface hairline pl-10 pr-4 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
                 />
-              </div>
+              </form>
             </div>
             <div className="px-4 py-3">
               <Link
@@ -337,28 +327,28 @@ export function Header() {
               ))}
               <div className="mt-6 border-t border-border pt-4 space-y-1">
                 <Link
-                  to="/"
+                  to="/knowledge"
                   onClick={() => setMobileOpen(false)}
                   className="block px-4 py-2.5 text-sm text-ink-soft hover:text-ink"
                 >
                   Knowledge Centre
                 </Link>
                 <Link
-                  to="/"
+                  to="/dealer-registration"
                   onClick={() => setMobileOpen(false)}
                   className="block px-4 py-2.5 text-sm text-ink-soft hover:text-ink"
                 >
                   Become a dealer
                 </Link>
                 <Link
-                  to="/"
+                  to="/auth/farmer"
                   onClick={() => setMobileOpen(false)}
                   className="block px-4 py-2.5 text-sm text-ink-soft hover:text-ink"
                 >
                   Farmer advisory
                 </Link>
                 <Link
-                  to="/"
+                  to="/about"
                   onClick={() => setMobileOpen(false)}
                   className="block px-4 py-2.5 text-sm text-ink-soft hover:text-ink"
                 >

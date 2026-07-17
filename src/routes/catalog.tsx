@@ -29,7 +29,7 @@ export const Route = createFileRoute("/catalog")({
       {
         name: "description",
         content:
-          "Explore the comprehensive taxonomy of seeds, crop protection, fertilizers, plant growth, machinery, irrigation, protected cultivation, and services.",
+          "Explore the comprehensive taxonomy of seeds, crop protection, fertilizers, machinery, irrigation, protected cultivation, and services.",
       },
     ],
   }),
@@ -41,7 +41,7 @@ const categoryIcons: Record<string, ComponentType<{ className?: string }>> = {
   seeds: Sprout,
   "crop-protection": ShieldCheck,
   fertilizers: Sparkles,
-  "plant-growth": Leaf,
+
   "farm-machinery": Tractor,
   irrigation: Droplets,
   "protected-cultivation": Home,
@@ -254,11 +254,10 @@ function CatalogExplorer() {
                 <button
                   key={c.slug}
                   onClick={() => setActiveTab(c.slug)}
-                  className={`w-full text-left px-4 py-3 rounded-xl border-l-4 transition-all duration-200 flex items-center justify-between group ${
-                    isActive
-                      ? `${accentClasses} font-medium border-l-4 shadow-soft`
-                      : "border-l-transparent text-ink-soft hover:text-ink hover:bg-surface"
-                  }`}
+                  className={`w-full text-left px-4 py-3 rounded-xl border-l-4 transition-all duration-200 flex items-center justify-between group ${isActive
+                    ? `${accentClasses} font-medium border-l-4 shadow-soft`
+                    : "border-l-transparent text-ink-soft hover:text-ink hover:bg-surface"
+                    }`}
                 >
                   <div className="flex items-center gap-3">
                     <IconComp

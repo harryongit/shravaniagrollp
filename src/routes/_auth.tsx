@@ -1,30 +1,31 @@
-import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
-import { useAuth } from "@/lib/auth";
+import { createFileRoute, Outlet, useNavigate } from "@tanstack/react-router";
+import { useUserStore } from "@/lib/user-store";
+import { Clock } from "lucide-react";
 
 export const Route = createFileRoute("/_auth")({
-  beforeLoad: ({ context }) => {
-    // We would ideally check context.auth here if we passed it in createRouter
-    // For now, we'll handle redirect in a wrapper component
-  },
   component: AuthGuard,
 });
 
 function AuthGuard() {
-  const { user, loading } = useAuth();
-  const navigate = Route.useNavigate();
+  const { currentUser, signOutUser } = useUserStore();
+  const navigate = useNavigate();
 
-  if (loading) {
-    return (
-      <div className="flex-1 flex items-center justify-center p-12">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
-      </div>
-    );
-  }
-
-  if (!user) {
+  if (!currentUser) {
     navigate({ to: "/auth/login", replace: true });
     return null;
   }
 
-  return <Outlet />;
+  return (
+    <div>
+      {currentUser.status === "pending" && (
+        <div className="bg-amber/10 border-b border-amber/20 px-4 py-3">
+          <div className="container-x flex items-center gap-3 text-sm text-amber-foreground">
+            <Clock className="h-4 w-4 flex-shrink-0" />
+            <span>Your account is pending admin verification. Some features will be available once approved.</span>
+          </div>
+        </div>
+      )}
+      <Outlet />
+    </div>
+  );
 }

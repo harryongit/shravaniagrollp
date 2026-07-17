@@ -10,10 +10,12 @@ import {
   Minus,
   Plus,
   Check,
+  Quote,
 } from "lucide-react";
 import { findProduct, formatINR, products, type Product } from "@/lib/catalog";
 import { ProductCard } from "@/components/site/ProductCard";
 import { useCart } from "@/lib/cart-store";
+import { toast } from "sonner";
 
 export const Route = createFileRoute("/products/$slug")({
   loader: ({ params }): { product: Product } => {
@@ -201,10 +203,10 @@ function PDP() {
           </div>
 
           <div className="mt-3 flex flex-wrap gap-2">
-            <button className="text-sm inline-flex items-center gap-2 rounded-full border border-border h-10 px-4 hover:border-primary/40 hover:text-primary">
+            <button onClick={() => toast("Dealer enquiry form coming soon.")} className="text-sm inline-flex items-center gap-2 rounded-full border border-border h-10 px-4 hover:border-primary/40 hover:text-primary">
               <MessageCircle className="h-4 w-4" /> Bulk / dealer enquiry
             </button>
-            <button className="text-sm inline-flex items-center gap-2 rounded-full border border-border h-10 px-4 hover:border-primary/40 hover:text-primary">
+            <button onClick={() => toast("WhatsApp integration coming soon.")} className="text-sm inline-flex items-center gap-2 rounded-full border border-border h-10 px-4 hover:border-primary/40 hover:text-primary">
               WhatsApp us
             </button>
           </div>
@@ -237,7 +239,7 @@ function PDP() {
               maxLength={6}
               className="h-10 w-28 rounded-full bg-background border border-border px-4 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
             />
-            <button className="h-10 px-4 rounded-full bg-ink text-background text-xs font-medium hover:bg-primary">
+            <button className="h-10 px-4 rounded-full bg-ink text-background dark:bg-[oklch(0.16_0.015_90)] dark:text-[oklch(0.976_0.012_90)] text-xs font-medium hover:bg-primary">
               Check
             </button>
           </div>
@@ -318,6 +320,41 @@ function PDP() {
           </div>
         </aside>
       </div>
+
+      {/* Reviews */}
+      <section id="reviews" className="mt-16">
+        <h2 className="text-display text-2xl sm:text-3xl mb-6">Customer Reviews</h2>
+        <div className="grid gap-4">
+          <div className="rounded-xl border border-border p-5">
+            <div className="flex items-center gap-1 text-amber">
+              <Star className="h-4 w-4 fill-amber" />
+              <Star className="h-4 w-4 fill-amber" />
+              <Star className="h-4 w-4 fill-amber" />
+              <Star className="h-4 w-4 fill-amber" />
+              <Star className="h-4 w-4 fill-amber" />
+            </div>
+            <div className="mt-2 font-medium text-ink">Excellent quality</div>
+            <p className="mt-1 text-sm text-ink-soft">Great product for my cotton crop. Noticed visible results within a week of application.</p>
+            <div className="mt-3 flex items-center gap-2 text-xs text-ink-soft">
+              <Quote className="h-3 w-3" /> Ramesh P. · Akola, MH
+            </div>
+          </div>
+          <div className="rounded-xl border border-border p-5">
+            <div className="flex items-center gap-1 text-amber">
+              <Star className="h-4 w-4 fill-amber" />
+              <Star className="h-4 w-4 fill-amber" />
+              <Star className="h-4 w-4 fill-amber" />
+              <Star className="h-4 w-4 fill-amber" />
+              <Star className="h-4 w-4 text-ink-soft" />
+            </div>
+            <div className="mt-2 font-medium text-ink">Original product, timely delivery</div>
+            <p className="mt-1 text-sm text-ink-soft">Verified product with batch number. Delivery was on time as promised.</p>
+            <div className="mt-3 flex items-center gap-2 text-xs text-ink-soft">
+              <Quote className="h-3 w-3" /> Suresh D. · Latur, MH
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Related */}
       <section className="mt-16">

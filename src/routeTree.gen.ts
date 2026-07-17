@@ -31,6 +31,9 @@ import { Route as AdminSettingsRouteImport } from './routes/admin.settings'
 import { Route as AdminOrdersRouteImport } from './routes/admin.orders'
 import { Route as AdminInventoryRouteImport } from './routes/admin.inventory'
 import { Route as AdminEmployeesRouteImport } from './routes/admin.employees'
+import { Route as AdminUsersRouteImport } from './routes/admin.users'
+import { Route as AdminReportsRouteImport } from './routes/admin.reports'
+import { Route as AdminContentRouteImport } from './routes/admin.content'
 import { Route as AdminCatalogRouteImport } from './routes/admin.catalog'
 import { Route as AuthWishlistRouteImport } from './routes/_auth.wishlist'
 import { Route as AuthWarehouseRouteImport } from './routes/_auth.warehouse'
@@ -161,6 +164,21 @@ const AdminCatalogRoute = AdminCatalogRouteImport.update({
   path: '/catalog',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminUsersRoute = AdminUsersRouteImport.update({
+  id: '/users',
+  path: '/users',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminReportsRoute = AdminReportsRouteImport.update({
+  id: '/reports',
+  path: '/reports',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminContentRoute = AdminContentRouteImport.update({
+  id: '/content',
+  path: '/content',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AuthWishlistRoute = AuthWishlistRouteImport.update({
   id: '/wishlist',
   path: '/wishlist',
@@ -262,6 +280,9 @@ export interface FileRoutesByFullPath {
   '/admin/inventory': typeof AdminInventoryRoute
   '/admin/orders': typeof AdminOrdersRoute
   '/admin/settings': typeof AdminSettingsRoute
+  '/admin/users': typeof AdminUsersRoute
+  '/admin/reports': typeof AdminReportsRoute
+  '/admin/content': typeof AdminContentRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/register': typeof AuthRegisterRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -271,6 +292,7 @@ export interface FileRoutesByFullPath {
   '/products/': typeof ProductsIndexRoute
 }
 export interface FileRoutesByTo {
+  '/': typeof IndexRoute
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/catalog': typeof CatalogRoute
@@ -299,6 +321,9 @@ export interface FileRoutesByTo {
   '/admin/inventory': typeof AdminInventoryRoute
   '/admin/orders': typeof AdminOrdersRoute
   '/admin/settings': typeof AdminSettingsRoute
+  '/admin/users': typeof AdminUsersRoute
+  '/admin/reports': typeof AdminReportsRoute
+  '/admin/content': typeof AdminContentRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/register': typeof AuthRegisterRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -339,6 +364,9 @@ export interface FileRoutesById {
   '/admin/inventory': typeof AdminInventoryRoute
   '/admin/orders': typeof AdminOrdersRoute
   '/admin/settings': typeof AdminSettingsRoute
+  '/admin/users': typeof AdminUsersRoute
+  '/admin/reports': typeof AdminReportsRoute
+  '/admin/content': typeof AdminContentRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/register': typeof AuthRegisterRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -379,6 +407,9 @@ export interface FileRouteTypes {
     | '/admin/inventory'
     | '/admin/orders'
     | '/admin/settings'
+    | '/admin/users'
+    | '/admin/reports'
+    | '/admin/content'
     | '/auth/login'
     | '/auth/register'
     | '/blog/$slug'
@@ -416,6 +447,9 @@ export interface FileRouteTypes {
     | '/admin/inventory'
     | '/admin/orders'
     | '/admin/settings'
+    | '/admin/users'
+    | '/admin/reports'
+    | '/admin/content'
     | '/auth/login'
     | '/auth/register'
     | '/blog/$slug'
@@ -455,6 +489,9 @@ export interface FileRouteTypes {
     | '/admin/inventory'
     | '/admin/orders'
     | '/admin/settings'
+    | '/admin/users'
+    | '/admin/reports'
+    | '/admin/content'
     | '/auth/login'
     | '/auth/register'
     | '/blog/$slug'
@@ -647,6 +684,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminCatalogRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/users': {
+      id: '/admin/users'
+      path: '/users'
+      fullPath: '/admin/users'
+      preLoaderRoute: typeof AdminUsersRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/reports': {
+      id: '/admin/reports'
+      path: '/reports'
+      fullPath: '/admin/reports'
+      preLoaderRoute: typeof AdminReportsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/content': {
+      id: '/admin/content'
+      path: '/content'
+      fullPath: '/admin/content'
+      preLoaderRoute: typeof AdminContentRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/_auth/wishlist': {
       id: '/_auth/wishlist'
       path: '/wishlist'
@@ -786,19 +844,25 @@ const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
 
 interface AdminRouteChildren {
   AdminCatalogRoute: typeof AdminCatalogRoute
+  AdminContentRoute: typeof AdminContentRoute
   AdminEmployeesRoute: typeof AdminEmployeesRoute
   AdminInventoryRoute: typeof AdminInventoryRoute
   AdminOrdersRoute: typeof AdminOrdersRoute
+  AdminReportsRoute: typeof AdminReportsRoute
   AdminSettingsRoute: typeof AdminSettingsRoute
+  AdminUsersRoute: typeof AdminUsersRoute
   AdminIndexRoute: typeof AdminIndexRoute
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
   AdminCatalogRoute: AdminCatalogRoute,
+  AdminContentRoute: AdminContentRoute,
   AdminEmployeesRoute: AdminEmployeesRoute,
   AdminInventoryRoute: AdminInventoryRoute,
   AdminOrdersRoute: AdminOrdersRoute,
+  AdminReportsRoute: AdminReportsRoute,
   AdminSettingsRoute: AdminSettingsRoute,
+  AdminUsersRoute: AdminUsersRoute,
   AdminIndexRoute: AdminIndexRoute,
 }
 

@@ -33,7 +33,7 @@ function Home() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="lg:col-span-8 lg:row-span-2 relative overflow-hidden rounded-3xl bg-ink text-background min-h-[520px] lg:min-h-[640px]"
+            className="lg:col-span-8 lg:row-span-2 relative overflow-hidden rounded-3xl bg-ink text-background dark:bg-[oklch(0.16_0.015_90)] dark:text-[oklch(0.976_0.012_90)] min-h-[520px] lg:min-h-[640px]"
           >
             <img
               src={heroFields}
@@ -42,18 +42,18 @@ function Home() {
               height={1200}
               className="absolute inset-0 h-full w-full object-cover opacity-70"
             />
-            <div className="absolute inset-0 bg-gradient-to-tr from-ink/85 via-ink/40 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-tr from-ink/85 via-ink/40 to-transparent dark:from-[oklch(0.16_0.015_90)/0.85] dark:via-[oklch(0.16_0.015_90)/0.4]" />
             <div className="relative h-full flex flex-col justify-between p-6 sm:p-10 lg:p-12">
-              <div className="flex items-center gap-2 text-[0.7rem] uppercase tracking-[0.24em] text-background/80">
+              <div className="flex items-center gap-2 text-[0.7rem] uppercase tracking-[0.24em] text-[oklch(0.976_0.012_90)/0.8]">
                 <span className="h-1.5 w-1.5 rounded-full bg-accent" />
                 Kharif 2026 · now shipping
               </div>
               <div className="max-w-2xl">
-                <h1 className="text-display text-[2.4rem] sm:text-5xl lg:text-[4rem] leading-[0.98] text-background">
+                <h1 className="text-display text-[2.4rem] sm:text-5xl lg:text-[4rem] leading-[0.98] text-[oklch(0.976_0.012_90)]">
                   Every input the season asks for,{" "}
                   <span className="text-accent">on one shelf.</span>
                 </h1>
-                <p className="mt-5 max-w-lg text-[0.98rem] text-background/80 leading-relaxed">
+                <p className="mt-5 max-w-lg text-[0.98rem] text-[oklch(0.976_0.012_90)/0.8] leading-relaxed">
                   Shravani Agroproducts Enterprises LLP brings certified seed, crop protection, plant nutrition,
                   irrigation and machinery under a single, agronomist-curated marketplace — built
                   for farmers, dealers and enterprises across India.
@@ -67,8 +67,8 @@ function Home() {
                     <ArrowUpRight className="ml-1.5 h-4 w-4" />
                   </Link>
                   <Link
-                    to="/"
-                    className="inline-flex h-12 items-center rounded-full border border-background/30 px-6 text-sm font-medium text-background hover:bg-background/10"
+                    to="/dealer-registration"
+                    className="inline-flex h-12 items-center rounded-full border border-[oklch(0.976_0.012_90)/0.3] px-6 text-sm font-medium text-[oklch(0.976_0.012_90)] hover:bg-[oklch(0.976_0.012_90)/0.1]"
                   >
                     Become a dealer
                   </Link>
@@ -116,13 +116,13 @@ function Home() {
               height={1200}
               className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/20 to-transparent" />
+             <div className="absolute inset-0 bg-gradient-to-t from-[oklch(0.16_0.015_90)/0.85] via-[oklch(0.16_0.015_90)/0.2] to-transparent dark:from-ink/85 dark:via-ink/20" />
             <div className="relative h-full flex flex-col justify-end p-6">
-              <div className="text-eyebrow text-background/70">Farmer stories</div>
-              <div className="mt-2 text-display text-xl text-background max-w-[16rem]">
+              <div className="text-eyebrow text-[oklch(0.976_0.012_90)/0.7] dark:text-background/70">Farmer stories</div>
+              <div className="mt-2 text-display text-xl text-[oklch(0.976_0.012_90)] dark:text-background max-w-[16rem]">
                 "The drip and biostimulant kit paid back in one crop."
               </div>
-              <div className="mt-3 text-xs text-background/70">
+              <div className="mt-3 text-xs text-[oklch(0.976_0.012_90)/0.7] dark:text-background/70">
                 Rameshwar B. · Cotton · Vidarbha
               </div>
             </div>
@@ -194,7 +194,7 @@ function Home() {
                   className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
                   loading="lazy"
                 />
-                <div className={`absolute inset-0 ${isAccent ? "bg-accent/80" : "bg-ink/70"}`} />
+                <div className={`absolute inset-0 ${isAccent ? "bg-accent/80" : "bg-[oklch(0.16_0.015_90)/0.7]"}`} />
                 <div className="relative flex items-start justify-between">
                   <div className="grid h-10 w-10 place-items-center rounded-xl bg-white/20">
                     <Icon className="h-5 w-5 text-white" />
@@ -246,7 +246,7 @@ function Home() {
                       className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.06]"
                       loading="lazy"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-ink/60 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[oklch(0.16_0.015_90)/0.6] to-transparent" />
                     <div className="absolute bottom-0 left-0 p-3">
                       <div className="text-display text-sm text-white leading-tight">{c.name}</div>
                       <div className="text-[0.65rem] text-white/70 mt-0.5">{c.season}</div>
@@ -293,14 +293,14 @@ function Home() {
             </div>
             <div className="grid grid-cols-2 gap-3 mt-8">
               {[
-                { t: "Cotton — Kharif 2026 playbook", k: "Crop Guide" },
-                { t: "Diagnosing yellow-leaf mosaic in chilli", k: "Pest & Disease" },
-                { t: "PM-KUSUM scheme, state-wise eligibility", k: "Schemes" },
-                { t: "Onion mandi prices — weekly trend", k: "Market Prices" },
+                { t: "Cotton — Kharif 2026 playbook", k: "Crop Guide", slug: "cotton-kharif-2026" },
+                { t: "Diagnosing yellow-leaf mosaic in chilli", k: "Pest & Disease", slug: "yellow-leaf-mosaic-chilli" },
+                { t: "PM-KUSUM scheme, state-wise eligibility", k: "Schemes", slug: "pm-kusum-eligibility" },
+                { t: "Onion mandi prices — weekly trend", k: "Market Prices", slug: "onion-mandi-prices" },
               ].map((a) => (
                 <Link
                   key={a.t}
-                  to="/"
+                  to="/knowledge"
                   className="rounded-xl bg-background border border-border p-4 hover:border-primary/40 group"
                 >
                   <div className="text-[0.65rem] uppercase tracking-widest text-primary">{a.k}</div>
@@ -330,7 +330,7 @@ function Home() {
                 Turnkey drip and sprinkler design for your plot.
               </div>
               <Link
-                to="/"
+                to="/contact"
                 className="mt-5 inline-flex h-11 items-center rounded-full bg-primary-foreground text-primary px-5 text-sm font-medium w-fit hover:opacity-90"
               >
                 Request a design →
@@ -342,7 +342,7 @@ function Home() {
 
       {/* DEALER CTA */}
       <section className="container-x mt-20 lg:mt-28">
-        <div className="relative overflow-hidden rounded-3xl bg-ink text-background p-8 sm:p-12 lg:p-16">
+        <div className="relative overflow-hidden rounded-3xl bg-ink text-background dark:bg-[oklch(0.16_0.015_90)] dark:text-[oklch(0.976_0.012_90)] p-8 sm:p-12 lg:p-16">
           <img
             src={handsSeedling}
             alt="Hands cradling seedlings in dark soil"
@@ -351,28 +351,28 @@ function Home() {
             className="absolute right-0 top-0 h-full w-1/2 object-cover opacity-40 hidden md:block"
             loading="lazy"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/90 to-transparent md:to-ink/20" />
+          <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/90 to-transparent md:to-ink/20 dark:from-[oklch(0.16_0.015_90)] dark:via-[oklch(0.16_0.015_90)/0.9] dark:md:to-[oklch(0.16_0.015_90)/0.2]" />
           <div className="relative max-w-xl">
-            <div className="text-[0.7rem] uppercase tracking-[0.22em] text-accent">
+            <div className="text-[0.7rem] uppercase tracking-[0.22em] text-accent dark:text-accent">
               Dealer Program
             </div>
-            <h3 className="mt-3 text-display text-3xl sm:text-4xl lg:text-5xl leading-[1.02]">
+            <h3 className="mt-3 text-display text-3xl sm:text-4xl lg:text-5xl leading-[1.02] text-[oklch(0.976_0.012_90)] dark:text-[oklch(0.976_0.012_90)]">
               Retail Shravani Agroproducts Enterprises LLP in your district.
             </h3>
-            <p className="mt-4 text-background/70 leading-relaxed">
+            <p className="mt-4 text-[oklch(0.976_0.012_90)/0.7] dark:text-[oklch(0.976_0.012_90)/0.7] leading-relaxed">
               Tier-based pricing, credit terms, protected territories, joint marketing budgets and a
               dedicated dealer success manager. Applications reviewed weekly.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
-                to="/"
+                to="/dealer-registration"
                 className="inline-flex h-12 items-center rounded-full bg-accent px-6 text-sm font-semibold text-accent-foreground hover:opacity-90"
               >
                 Apply to become a dealer
               </Link>
               <Link
-                to="/"
-                className="inline-flex h-12 items-center rounded-full border border-background/30 px-6 text-sm font-medium hover:bg-background/10"
+                to="/dealer-registration"
+                className="inline-flex h-12 items-center rounded-full border border-[oklch(0.976_0.012_90)/0.3] px-6 text-sm font-medium text-[oklch(0.976_0.012_90)] hover:bg-[oklch(0.976_0.012_90)/0.1]"
               >
                 Distributor track
               </Link>

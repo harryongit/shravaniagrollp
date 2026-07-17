@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { toast } from "sonner";
 
 export const Route = createFileRoute("/contact")({
   component: Contact,
@@ -42,7 +43,7 @@ function Contact() {
                 <Phone className="h-5 w-5 text-primary" /> Phone
               </h3>
               <p className="text-sm text-ink-soft leading-relaxed">
-                Farmer Helpline: 1800-000-0000
+                Farmer Helpline: 1800-180-1551
                 <br />
                 Dealer Support: +91 98765 43210
               </p>
@@ -62,7 +63,11 @@ function Contact() {
 
           <div className="md:col-span-3 surface-card p-6 sm:p-8">
             <h3 className="text-xl font-medium text-ink mb-6">Send us a message</h3>
-            <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+            <form className="space-y-4" onSubmit={(e) => {
+              e.preventDefault();
+              toast.success("Message sent successfully. Our team will contact you shortly.");
+              (e.target as HTMLFormElement).reset();
+            }}>
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label htmlFor="firstName">First name</Label>
